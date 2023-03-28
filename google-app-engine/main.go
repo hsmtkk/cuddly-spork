@@ -42,11 +42,11 @@ func personHandler(c echo.Context) error {
 	resp := responseSchema{ID: id}
 	switch id % 3 {
 	case 0:
-		resp = responseSchema{Name: "Alice"}
+		resp.Name = "Alice"
 	case 1:
-		resp = responseSchema{Name: "Bravo"}
+		resp.Name = "Bravo"
 	default:
-		resp = responseSchema{Name: "Charlie"}
+		resp.Name = "Charlie"
 	}
 	return c.JSON(http.StatusOK, resp)
 }
