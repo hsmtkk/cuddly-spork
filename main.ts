@@ -4,6 +4,7 @@ import * as google from '@cdktf/provider-google';
 
 const project = 'cuddly-spork';
 const region = 'us-central1';
+const repository = 'cuddly-spork';
 
 class MyStack extends TerraformStack {
   constructor(scope: Construct, id: string) {
@@ -14,7 +15,20 @@ class MyStack extends TerraformStack {
         region,
     });
 
-    
+    new google.cloudbuildTrigger.CloudbuildTrigger(this, 'buildTrigger', {
+        filename: 'cloudbuild.yaml',
+        github: {
+            name: repository,
+            owner: 'hsmtkk',
+            push: {
+                branch: 'main',
+            },
+        },
+    });
+
+    new google.appEngineApplication.AppEngineApplication(this, 'googleAppEngine', {
+        locationId: 'us-central',
+    });
 
   }
 }
