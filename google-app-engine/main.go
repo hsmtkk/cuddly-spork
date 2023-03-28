@@ -23,7 +23,7 @@ func main() {
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 
-	e.GET("/person/:id", personHandler)
+	e.GET("/person", personHandler)
 
 	e.Logger.Fatal(e.Start(fmt.Sprintf(":%d", port)))
 }
@@ -34,7 +34,7 @@ type responseSchema struct {
 }
 
 func personHandler(c echo.Context) error {
-	idStr := c.Param("id")
+	idStr := c.QueryParam("id")
 	id, err := strconv.Atoi(idStr)
 	if err != nil {
 		return fmt.Errorf("failed to parse %s as int; %w", idStr, err)
