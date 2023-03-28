@@ -1,0 +1,67 @@
+swagger: '2.0'
+info:
+  title: person API
+  description: person API
+  version: 1.0.0
+schemes:
+  - https
+produces:
+  - application/json
+paths:
+  /v1/person/{id}:
+    get:
+      summary: person API v1
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: integer
+        minimum: 1
+        description: person ID
+      operationId: v1
+      x-google-backend:
+        address: https://cuddly-spork.uc.r.appspot.com/person
+        path_translation: CONSTANT_ADDRESS
+      responses:
+        '200':
+          description: success
+          schema:
+            type: string
+  /v2/person/{id}:
+    get:
+      summary: person API v2
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: integer
+        minimum: 1
+        description: person ID
+      operationId: v2
+      x-google-backend:
+        address: https://person-riwryxeq2a-uc.a.run.app/person
+        path_translation: CONSTANT_ADDRESS
+      responses:
+        '200':
+          description: success
+          schema:
+            type: string
+  /v3/person/{id}:
+    get:
+      summary: person API v3
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: integer
+        minimum: 1
+        description: person ID
+      operationId: v3
+      x-google-backend:
+        address: https://person-function-riwryxeq2a-uc.a.run.app
+        path_translation: CONSTANT_ADDRESS
+      responses:
+        '200':
+          description: success
+          schema:
+            type: string
